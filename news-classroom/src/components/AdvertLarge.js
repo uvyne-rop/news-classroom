@@ -1,8 +1,21 @@
-import React from "react";
-  const AdvertLarge = () => {
-    return <div className="AdvertLarge">
-        <div className="advertLargeWrapper">advert here</div>
-    </div>
-  }
+// import React from "react";
+//   const AdvertLarge = () => {
+//     return <div className="AdvertLarge">
+//         <div className="advertLargeWrapper">advert here</div>
+//     </div>
+//   }
 
-  export default AdvertLarge;
+//   export default AdvertLarge;
+
+// AdvertLarge.js
+import React from "react";
+
+const AdvertLarge = () => {
+    return (
+        <div className="AdvertLarge">
+            <div className="advertLargeWrapper">advert here</div>
+        </div>
+    );
+};
+
+export default AdvertLarge;
