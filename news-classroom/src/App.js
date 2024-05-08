@@ -1,42 +1,42 @@
 
 
-// // // // import React, { useState, useEffect } from 'react';
-// // // // import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-// // // // import Menu from './components/Menu';
-// // // // import NewsGrid from './components/NewsGrid';
-// // // // import NewsItem from './components/NewsItem';
-// // // // import MainLayout from './components/MainLayout';
-// // // // import "tailwindcss/tailwind.css"
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Menu from './components/Menu';
+import NewsGrid from './components/NewsGrid';
+import NewsItem from './components/NewsItem';
+// import MainLayout from './components/MainLayout';
+import "tailwindcss/tailwind.css"
 
-// // // // function App() {
-// // // //     const [items, setItems] = useState([]);
-// // // //     const [active, setActive] = useState(1);
-// // // //     const [category, setCategory] = useState("general");
+function App() {
+    const [items, setItems] = useState([]);
+    const [active, setActive] = useState(1);
+    const [category, setCategory] = useState("general");
 
-// // // //     useEffect(() => {
-// // // //         fetch(`https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=f5b76f1dd5d44c80a5c586f7a9cb5090`)
-// // // //             .then(res => res.json())
-// // // //             .then(data => setItems(data.articles))
-// // // //             .catch(error => console.error('Error fetching data:', error));
-// // // //     }, [category]);
+    useEffect(() => {
+        fetch(`https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=f5b76f1dd5d44c80a5c586f7a9cb5090`)
+            .then(res => res.json())
+            .then(data => setItems(data.articles))
+            .catch(error => console.error('Error fetching data:', error));
+    }, [category]);
 
-// // // //     return (
-// // // //         <Router>
-// // // //             <div className="App">
-// // // //                 <h1 className="title text-center text-4xl text-bold py-20" >See The Latest</h1>
-// // // //                 <Menu active={active} setActive={setActive} setCategory={setCategory} />
+    return (
+        <Router>
+            <div className="App">
+                <h1 className="title text-center text-4xl text-bold py-20" >See The Latest</h1>
+                <Menu active={active} setActive={setActive} setCategory={setCategory} />
                 
-// // // //                 <Routes>
-// // // //                     <Route path="/" element={<NewsGrid items={items} />} />
-// // // //                     <Route path="/:category" element={<NewsGrid items={items} />} />
-// // // //                     <Route path="/news/:id" element={<NewsItem />} />
-// // // //                 </Routes>
-// // // //             </div>
-// // // //         </Router>
-// // // //     );
-// // // // }
+                <Routes>
+                    <Route path="/" element={<NewsGrid items={items} />} />
+                    <Route path="/:category" element={<NewsGrid items={items} />} />
+                    <Route path="/news/:id" element={<NewsItem />} />
+                </Routes>
+            </div>
+        </Router>
+    );
+}
 
-// // // // export default App;
+export default App;
 
 
 
@@ -193,20 +193,20 @@
 // export default App;
 
 
-import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import AdvertLarge from './components/AdvertLarge'; // Corrected import path for AdvertLarge component
-import Head from './components/Head'; // Corrected import path for Head component
-import MainLayout from './components/MainLayout'; // Corrected import path for MainLayout component
+// import React from 'react';
+// import { BrowserRouter as Router } from 'react-router-dom';
+// import AdvertLarge from './components/AdvertLarge'; // Corrected import path for AdvertLarge component
+// import Head from './components/Head'; // Corrected import path for Head component
+// import MainLayout from './components/MainLayout'; // Corrected import path for MainLayout component
 
-function App() {
-    return (
-        <Router>
-            <AdvertLarge />
-            <Head />
-            <MainLayout />
-        </Router>
-    );
-}
+// function App() {
+//     return (
+//         <Router>
+//             <AdvertLarge />
+//             <Head />
+//             <MainLayout />
+//         </Router>
+//     );
+// }
 
-export default App;
+// export default App;
