@@ -1,3 +1,17 @@
+/* Light Mode */
+.light {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* Dark Mode */
+.dark {
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+
+
+
 /* @import "tailwind" base; 
 @import "tailwind" components;
  @import "tailwind" utilities;
