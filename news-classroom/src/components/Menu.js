@@ -2,10 +2,12 @@
 
 
 
+
 import React from "react";
 import { Link } from 'react-router-dom';
+// import MainLayout from "./components/MainLayout";
 
-function Menu({ active, setActive, setCategory }) {
+function Menu({ active, setActive, setCategory, darkMode }) {
     const links = [
         { id: 1, name: "General", value: "general" },
         { id: 2, name: "Business", value: "business" },
@@ -22,12 +24,12 @@ function Menu({ active, setActive, setCategory }) {
     }
 
     return (
-        <nav className="menu flex justify-center">
+        <nav className={`menu flex justify-center ${darkMode ? "dark" : ""}`}>
             <ul className="flex space-x-4">
                 {links.map((link) => (
                     <li
                         key={link.id}
-                        className={`p-2 bg-red-300 rounded-full cursor-pointer transition duration-300 ${active === link.id ? "bg-gray-400 hover:bg-gray-500" : "bg-gray-400 hover:bg-gray-300"}`}
+                        className={`p-2 rounded-full cursor-pointer transition duration-300 ${active === link.id ? "bg-gray-400 hover:bg-gray-500" : "bg-gray-400 hover:bg-gray-300"}`}
                         onClick={() => onClick(link.id, link.value)}
                     >
                         <Link to={`/${link.value}`} className="text-black">{link.name}</Link>
@@ -39,5 +41,3 @@ function Menu({ active, setActive, setCategory }) {
 }
 
 export default Menu;
-
-
