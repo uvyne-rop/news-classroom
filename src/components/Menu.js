@@ -32,7 +32,13 @@ function Menu({ active, setActive, setCategory, darkMode }) {
                         className={`p-2 rounded-full cursor-pointer transition duration-300 ${active === link.id ? "bg-gray-400 hover:bg-gray-500" : "bg-gray-400 hover:bg-gray-300"}`}
                         onClick={() => handleClick(link.id, link.value)}
                     >
-                        <Link to={`/${link.value}`} className="text-black">{link.name}</Link>
+                         <Link
+                            to={`/${link.value}`}
+                            className="text-black"
+                            onClick={() => handleClick(link.id, link.value)}
+                        >
+                            {link.name}
+                        </Link>
                     </li>
                 ))}
             </ul>
