@@ -126,7 +126,7 @@ function App() {
     return (
         <div className={`App ${isDarkMode ? "dark" : ""}`}>
             <header className="py-4 px-8 flex justify-between items-center">
-                <h1 className="text-4xl font-bold">See The Latest</h1>
+                <h1 className="title text-center text-4xl font-bold py-20 px-30">See The Latest</h1>
                 <button onClick={toggleDarkMode} className="px-4 py-2 rounded-lg bg-gray-300 hover:bg-gray-400">
                     {isDarkMode ? 'Light Mode' : 'Dark Mode'}
                 </button>
