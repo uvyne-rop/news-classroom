@@ -21,27 +21,7 @@ function App() {
         setIsDarkMode(prevMode => !prevMode);
     }
 
-    // useEffect(() => {
-    //     setIsLoading(true); // Set loading state to true before fetching data
-    //     fetch(`https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=f5b76f1dd5d44c80a5c586f7a9cb5090`)
-            
-    //         .then(res => {
-    //             if (!res.ok) {
-    //                 throw new Error('Failed to fetch data');
-    //             }
-    //             return res.json();
-    //         })
-    //         .then(data => {
-    //             setItems(data.articles);
-    //             setIsLoading(false); // Set loading state to false after successful fetch
-    //         })
-    //         .catch(error => {
-    //             console.error('Error fetching data:', error);
-    //             setIsLoading(false); // Set loading state to false if fetch fails
-    //         });
-    // }, [category]);
-
-
+   
     useEffect(() => {
         setIsLoading(true); // Set loading state to true before fetching data
         fetch(`https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=f5b76f1dd5d44c80a5c586f7a9cb5090`)
@@ -73,15 +53,7 @@ function App() {
                 <div className="container mx-auto">
                     <Menu active={active} setActive={setActive} setCategory={setCategory} darkMode={isDarkMode} />
                     
-                    {/* {isLoading ? ( // Render spinner if data is loading
-                        <div className="spinner"></div>
-                    ) : (
-                        <Routes>
-                            <Route path="/" element={<NewsGrid items={items} />} />
-                            <Route path="/:category" element={<NewsGrid items={items} />} />
-                            <Route path="/news/:id" element={<NewsItem />} />
-                        </Routes>
-                    )} */}
+                    
                     {isLoading ? (
     <div className="spinner"></div> // Render spinner if data is loading
 ) : (
