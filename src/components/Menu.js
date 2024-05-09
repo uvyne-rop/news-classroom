@@ -5,7 +5,6 @@
 
 import React from "react";
 import { Link } from 'react-router-dom';
-// import MainLayout from "./components/MainLayout";
 
 function Menu({ active, setActive, setCategory, darkMode }) {
     const links = [
@@ -18,10 +17,11 @@ function Menu({ active, setActive, setCategory, darkMode }) {
         { id: 7, name: "Technology", value: "technology" },
     ];
 
-    function onClick(id, value) {
+    const handleClick = (id, value) => {
         setActive(id);
         setCategory(value);
-    }
+    
+    };
 
     return (
         <nav className={`menu flex justify-center ${darkMode ? "dark" : ""}`}>
@@ -30,7 +30,7 @@ function Menu({ active, setActive, setCategory, darkMode }) {
                     <li
                         key={link.id}
                         className={`p-2 rounded-full cursor-pointer transition duration-300 ${active === link.id ? "bg-gray-400 hover:bg-gray-500" : "bg-gray-400 hover:bg-gray-300"}`}
-                        onClick={() => onClick(link.id, link.value)}
+                        onClick={() => handleClick(link.id, link.value)}
                     >
                         <Link to={`/${link.value}`} className="text-black">{link.name}</Link>
                     </li>
