@@ -1,29 +1,4 @@
 
-
-// // MainLayout.js
-// import React, { useState } from 'react';
-
-// const MainLayout = () => {
-//     const [darkMode, setDarkMode] = useState(false);
-
-//     const toggleDarkMode = () => {
-//         setDarkMode(!darkMode);
-//     };
-
-//     return (
-//         <div className={darkMode ? "dark" : ""}>
-//             <button onClick={toggleDarkMode} className="m-4 p-2 bg-gray-300 hover:bg-gray-400 rounded">Toggle Mode</button>
-//             <h1 className="text-3xl font-bold">{darkMode ? 'Dark Mode' : 'Light Mode'}</h1>
-//             {/* Your layout components */}
-//         </div>
-//     );
-// };
-
-// export default MainLayout;
-
-
-
-// MainLayout.js
 import React, { useState } from 'react';
 import Menu from './Menu';
 
