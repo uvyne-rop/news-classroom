@@ -1,75 +1,135 @@
-
-
-
-
-
-
-
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import MainLayout from './components/MainLayout';
-import Menu from './components/Menu'; // Import Menu component
-import NewsGrid from './components/NewsGrid';
-import './App.css'; // Import Tailwind CSS
-import "tailwindcss/tailwind.css";
+import { useState } from "react";
+import NewsList from "./Components/NewsList";
 
 function App() {
-    const [items, setItems] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [isDarkMode, setIsDarkMode] = useState(false);
-    const [activeSection, setActiveSection] = useState("arts"); // Renamed from 'section'
+  const [category, setCategory] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
-    function toggleDarkMode() {
-        setIsDarkMode(prevMode => !prevMode);
-    }
+  const handleCategoryClick = (category) => {
+    setCategory(category);
+    setSearchTerm("");
+  };
 
-    // Define setActive function
-    const setActive = (index) => {
-        setActiveSection(index);
-    };
+  const handleSearch = (event) => {
+    event.preventDefault();
+    setCategory("");
+    setSearchTerm(event.target.search.value);
+  };
 
-    useEffect(() => {
-        setIsLoading(true);
-        fetch(`https://api.nytimes.com/svc/topstories/v2/${activeSection}.json?api-key=AWueMAGFIBxn3UB1wjBOXsHEHQhk2T3k`)
-            .then(res => {
-                if (!res.ok) {
-                    throw new Error('Failed to fetch data');
-                }
-                return res.json();
-            })
-            .then(data => {
-                setItems(data.results);
-                setIsLoading(false);
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-                setIsLoading(false);
-            });
-    }, [activeSection]);
-
-    return (
-        <div className={`App ${isDarkMode ? "dark" : ""}`}>
-            <header className="py-4 px-8 flex justify-between items-center">
-                <h1 className="text-4xl font-bold">See The Latest</h1>
-                <button onClick={toggleDarkMode} className="px-4 py-2 rounded-lg bg-gray-300 hover:bg-gray-400">
-                    {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+  return (
+    <>
+      <nav className="bg-gray-100 p-4 mb-4">
+        <div className="container mx-auto flex justify-between items-center">
+          <a href="/" className="font-bold text-2xl">
+            News App
+          </a>
+          <div className="flex">
+            <div className="dropdown mr-4">
+              <button className="bg-blue-500 text-white px-4 py-2 rounded-md">
+                Categories
+              </button>
+              <div className="dropdown-menu absolute hidden bg-white py-2 rounded-md shadow-md">
+                <button
+                  className="block px-4 py-2 text-gray-800 hover:bg-gray-200 w-full text-left"
+                  onClick={() => handleCategoryClick("world")}
+                >
+                  World
                 </button>
-            </header>
-            <Router>
-                <MainLayout>
-                    {/* Pass setActive function to Menu component */}
-                    <Menu setActive={setActive} active={activeSection} setSection={setActiveSection} darkMode={isDarkMode} />
-                    {isLoading ? (
-                        <div className="spinner"></div>
-                    ) : (
-                        <Routes>
-                            <Route path="/" element={<NewsGrid items={items} />} />
-                        </Routes>
-                    )}
-                </MainLayout>
-            </Router>
+                <button
+                  className="block px-4 py-2 text-gray-800 hover:bg-gray-200 w-full text-left"
+                  onClick={() => handleCategoryClick("business")}
+                >
+                  Business
+                </button>
+                <button
+                  className="block px-4 py-2 text-gray-800 hover:bg-gray-200 w-full text-left"
+                  onClick={() => handleCategoryClick("technology")}
+                >
+                  Technology
+                </button>
+                <button
+                  className="block px-4 py-2 text-gray-800 hover:bg-gray-200 w-full text-left"
+                  onClick={() => handleCategoryClick("sports")}
+                >
+                  Sports
+                </button>
+                <button
+                  className="block px-4 py-2 text-gray-800 hover:bg-gray-200 w-full text-left"
+                  onClick={() => handleCategoryClick("entertainment")}
+                >
+                  Entertainment
+                </button>
+              </div>
+            </div>
+
+            <form onSubmit={handleSearch} className="flex">
+              <input
+                type="text"
+                placeholder="Search"
+                className="border border-gray-300 rounded-l-md px-4 py-2 focus:outline-none"
+                name="search"
+              />
+              <button className="bg-blue-500 text-white px-4 py-2 rounded-r-md">
+                Search
+              </button>
+            </form>
+          </div>
         </div>
-    );
+      </nav>
+      <div className="container mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div>
+            <h5 className="text-lg font-bold mb-2">Categories</h5>
+            <ul className="space-y-2">
+              <li>
+                <button
+                  className="text-blue-500 hover:underline"
+                  onClick={() => handleCategoryClick("world")}
+                >
+                  World
+                </button>
+              </li>
+              <li>
+                <button
+                  className="text-blue-500 hover:underline"
+                  onClick={() => handleCategoryClick("business")}
+                >
+                  Business
+                </button>
+              </li>
+              <li>
+                <button
+                  className="text-blue-500 hover:underline"
+                  onClick={() => handleCategoryClick("technology")}
+                >
+                  Technology
+                </button>
+              </li>
+              <li>
+                <button
+                  className="text-blue-500 hover:underline"
+                  onClick={() => handleCategoryClick("sports")}
+                >
+                  Sports
+                </button>
+              </li>
+              <li>
+                <button
+                  className="text-blue-500 hover:underline"
+                  onClick={() => handleCategoryClick("entertainment")}
+                >
+                  Entertainment
+                </button>
+              </li>
+            </ul>
+          </div>
+          <div className="col-span-2">
+            <NewsList category={category} searchTerm={searchTerm} />
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }
 
 export default App;

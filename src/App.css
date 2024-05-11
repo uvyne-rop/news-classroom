@@ -25,6 +25,28 @@
       transform: rotate(360deg);
   }
 }
+.menu-buttons {
+  display: flex;
+  justify-content: space-around; /* Adjust as needed */
+  padding: 0 20px; /* Add padding for spacing */
+}
+
+.menu-buttons button {
+  border: none;
+  background: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.menu-buttons button.active {
+  background-color: #ccc; /* Add styles for active button */
+}
+
+.menu-buttons button:hover {
+  background-color: #f0f0f0; /* Add hover effect */
+}
+
 
 /* @import "tailwind" base; 
 @import "tailwind" components;
