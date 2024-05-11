@@ -1,8 +1,13 @@
 
+
+
+
+
+// MainLayout.js
 import React, { useState } from 'react';
 import Menu from './Menu';
 
-const MainLayout = () => {
+const MainLayout = ({ children }) => {
     const [darkMode, setDarkMode] = useState(false);
 
     const toggleDarkMode = () => {
@@ -17,6 +22,7 @@ const MainLayout = () => {
                 </button>
             </div>
             <Menu darkMode={darkMode} />
+            {children}
         </div>
     );
 };

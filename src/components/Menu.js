@@ -1,44 +1,23 @@
 
 
+import React from 'react';
 
+function Menu({ active, setActive, setSection, darkMode }) {
+    const sections = ["Arts", "Entertainment", "Health", "Sports", "Science"];
 
-
-import React from "react";
-import { Link } from 'react-router-dom';
-
-function Menu({ active, setActive, setCategory, darkMode }) {
-    const links = [
-        { id: 1, name: "General", value: "general" },
-        { id: 2, name: "Business", value: "business" },
-        { id: 3, name: "Entertainment", value: "entertainment" },
-        { id: 4, name: "Health", value: "health" },
-        { id: 5, name: "Science", value: "science" },
-        { id: 6, name: "Sports", value: "sports" },
-        { id: 7, name: "Technology", value: "technology" },
-    ];
-
-    const handleClick = (id, value) => {
-        setActive(id);
-        setCategory(value);
-    
+    const handleSectionClick = (index, section) => {
+        setActive(index);
+        setSection(section.toLowerCase()); // Convert section to lowercase
     };
 
     return (
-        <nav className={`menu flex justify-center ${darkMode ? "dark" : ""}`}>
-            <ul className="flex space-x-4">
-                {links.map((link) => (
-                    <li
-                        key={link.id}
-                        className={`p-2 rounded-full cursor-pointer transition duration-300 ${active === link.id ? "bg-gray-400 hover:bg-gray-500" : "bg-gray-400 hover:bg-gray-300"}`}
-                        onClick={() => handleClick(link.id, link.value)}
-                    >
-                         <Link
-                            to={`/${link.value}`}
-                            className="text-black"
-                            onClick={() => handleClick(link.id, link.value)}
-                        >
-                            {link.name}
-                        </Link>
+        <nav className={`menu ${darkMode ? "dark" : ""}`}>
+            <ul>
+                {sections.map((section, index) => (
+                    <li key={index} className={active === index ? "active" : ""}>
+                        <button onClick={() => handleSectionClick(index, section)}>
+                            {section}
+                        </button>
                     </li>
                 ))}
             </ul>

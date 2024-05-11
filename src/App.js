@@ -1,30 +1,36 @@
 
 
+
+
+
+
+
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Menu from './components/Menu';
+import MainLayout from './components/MainLayout';
+import Menu from './components/Menu'; // Import Menu component
 import NewsGrid from './components/NewsGrid';
-import NewsItem from './components/NewsItem';
 import './App.css'; // Import Tailwind CSS
 import "tailwindcss/tailwind.css";
 
 function App() {
-    
-    const [items, setItems] = useState([]); // Initialize items as null
-    const [active, setActive] = useState(1);
-    const [category, setCategory] = useState("general");
+    const [items, setItems] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
     const [isDarkMode, setIsDarkMode] = useState(false);
-    const [isLoading, setIsLoading] = useState(true); // Add loading state
+    const [activeSection, setActiveSection] = useState("arts"); // Renamed from 'section'
 
-    // Function to toggle dark mode
     function toggleDarkMode() {
         setIsDarkMode(prevMode => !prevMode);
     }
 
-   
+    // Define setActive function
+    const setActive = (index) => {
+        setActiveSection(index);
+    };
+
     useEffect(() => {
-        setIsLoading(true); // Set loading state to true before fetching data
-        fetch(`https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=f5b76f1dd5d44c80a5c586f7a9cb5090`)
+        setIsLoading(true);
+        fetch(`https://api.nytimes.com/svc/topstories/v2/${activeSection}.json?api-key=AWueMAGFIBxn3UB1wjBOXsHEHQhk2T3k`)
             .then(res => {
                 if (!res.ok) {
                     throw new Error('Failed to fetch data');
@@ -32,14 +38,14 @@ function App() {
                 return res.json();
             })
             .then(data => {
-                setItems(data.articles);
-                setIsLoading(false); // Set loading state to false after successful fetch
+                setItems(data.results);
+                setIsLoading(false);
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
-                setIsLoading(false); // Set loading state to false if fetch fails
+                setIsLoading(false);
             });
-    }, [category]);
+    }, [activeSection]);
 
     return (
         <div className={`App ${isDarkMode ? "dark" : ""}`}>
@@ -50,23 +56,20 @@ function App() {
                 </button>
             </header>
             <Router>
-                <div className="container mx-auto">
-                    <Menu active={active} setActive={setActive} setCategory={setCategory} darkMode={isDarkMode} />
-                    
-                    
+                <MainLayout>
+                    {/* Pass setActive function to Menu component */}
+                    <Menu setActive={setActive} active={activeSection} setSection={setActiveSection} darkMode={isDarkMode} />
                     {isLoading ? (
-    <div className="spinner"></div> // Render spinner if data is loading
-) : (
-    <Routes>
-        <Route path="/" element={<NewsGrid items={items} />} />
-        <Route path="/:category" element={<NewsGrid items={items} />} />
-        <Route path="/news/:id" element={<NewsItem />} />
-    </Routes>
-)}
-
-                </div>
+                        <div className="spinner"></div>
+                    ) : (
+                        <Routes>
+                            <Route path="/" element={<NewsGrid items={items} />} />
+                        </Routes>
+                    )}
+                </MainLayout>
             </Router>
         </div>
     );
 }
+
 export default App;
