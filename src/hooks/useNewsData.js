@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 
+
 const useNewsData = (category, searchTerm) => {
   const [newsData, setNewsData] = useState([]);
   const [loading, setLoading] = useState(true);
