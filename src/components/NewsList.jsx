@@ -1,13 +1,12 @@
 
-
-
-import { useState } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 import useNewsData from "../hooks/useNewsData";
 import CustomPagination from "./CustomPagination";
 
 const NewsList = (props) => {
   const { category, searchTerm } = props;
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = React.useState(1);
   const pageSize = 4;
 
   const onPageChange = (pageNumber) => setCurrentPage(pageNumber);
@@ -29,7 +28,7 @@ const NewsList = (props) => {
   const currentArticles = newsData.slice(startIndex, endIndex);
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto hover:bg:gray-700 ">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {currentArticles?.map((article) => (
           <div key={article.url} className="max-w-sm rounded overflow-hidden shadow-lg">
@@ -39,7 +38,9 @@ const NewsList = (props) => {
               <p className="text-gray-700 text-base">{article.description}</p>
             </div>
             <div className="px-6 pt-4 pb-2">
-              <a href={article.url} className="text-blue-500 font-semibold">Read More</a>
+              <Link to="/login" className="text-blue-500 font-semibold">
+                Read More
+              </Link>
             </div>
           </div>
         ))}
