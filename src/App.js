@@ -21,8 +21,8 @@ function App() {
 
   const handleSearch = (event) => {
     event.preventDefault();
-    setCategory("");
-    setSearchTerm(event.target.search.value);
+    setCategory(""); // Clear category
+    setSearchTerm(event.target.search.value.trim()); // Trim whitespace from search term
   };
 
   const toggleDarkMode = () => {
