@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import NewsList from "./components/NewsList";
 import LoginForm from "./components/LoginForm";
+import HomePage from "./components/HomePage";
 import Category from "./components/Category"; // Import Category component
 import "./App.css";
 
@@ -78,6 +79,7 @@ function App() {
           </div>
         </nav>
         <Routes>
+        <Route path="/" element={<HomePage />} />
           <Route exact path="/" element={<NewsList category={category} searchTerm={searchTerm} />} />
           <Route path="/category/:categoryName" element={<Category />} /> {/* Include Category component */}
           <Route path="/login" element={<LoginForm />} />
